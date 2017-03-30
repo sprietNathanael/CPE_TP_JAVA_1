@@ -20,6 +20,27 @@ public class CPE_TP_JAVA_1 {
         h1 = new HommePolitique("parti1", "nom1", "prenom1", Civilite.FEMME);
         h3 = new HommePolitique("parti3", "nom3", "prenom3", Civilite.HOMME);
         System.out.println(h1.toString());
+        System.out.println(h1 == h3); // false
+        h1 = h3;
+        System.out.println("h1 = "+h1);
+        System.out.println("h3 = "+h3);
+        System.out.println(h1 == h3); //true
+        System.out.println(h1.equals(h3));
+        h1.setCivilite(Civilite.FEMME);
+        System.out.println("h1 = "+h1);
+        System.out.println("h3 = "+h3);
+        h2 = new HommePolitique(h1.getParti(), h1.getNom(), h1.getPrenom(), h1.getCivilite());
+        System.out.println("-------------");
+        System.out.println("h1 = "+h1);
+        System.out.println("h2 = "+h2);
+        System.out.println(h1 == h2); // false
+        System.out.println(h1.equals(h2));
+        h1.setCivilite(Civilite.HOMME);
+        System.out.println(h1.equals(h2));
+        System.out.println(h1.compareTo(h2));
+        h1.setCivilite(Civilite.FEMME);
+        System.out.println(h1.compareTo(h2));
+        
     }
     
 }

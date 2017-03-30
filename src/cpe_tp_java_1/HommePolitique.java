@@ -5,11 +5,13 @@
  */
 package cpe_tp_java_1;
 
+import java.util.Objects;
+
 /**
  *
  * @author nathanael
  */
-public class HommePolitique
+public class HommePolitique implements Comparable<HommePolitique>
 {
 
     public HommePolitique(String parti, String nom, String prenom, Civilite civilite) {
@@ -113,7 +115,53 @@ public class HommePolitique
         }
         return("Homme Politique : "+this.prenom+" "+this.nom+" ; civilité : "+civilite+" ; parti : "+this.parti);
     }
-    
-    
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.parti);
+        hash = 97 * hash + Objects.hashCode(this.nom);
+        hash = 97 * hash + Objects.hashCode(this.prenom);
+        hash = 97 * hash + Objects.hashCode(this.civilite);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final HommePolitique other = (HommePolitique) obj;
+        if (!Objects.equals(this.parti, other.parti)) {
+            return false;
+        }
+        if (!Objects.equals(this.nom, other.nom)) {
+            return false;
+        }
+        if (!Objects.equals(this.prenom, other.prenom)) {
+            return false;
+        }
+        if (this.civilite != other.civilite) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int compareTo(HommePolitique o) {
+        
+        int comparison = 0;
+        comparison = comparison + this.parti.compareTo(o.parti);
+        comparison = comparison + this.nom.compareTo(o.nom);
+        comparison = comparison + this.prenom.compareTo(o.prenom);
+        comparison = comparison + this.civilite.compareTo(o.civilite);
+        
+        return comparison;
+    }
 }

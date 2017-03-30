@@ -5,6 +5,7 @@
  */
 package cpe_tp_java_1;
 
+import java.util.Objects;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -131,10 +132,81 @@ public class HommePolitiqueTest {
     public void testSetCivilite() {
         System.out.println("setCivilite");
         Civilite civilite = Civilite.HOMME;
-         HommePolitique instance = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
+        HommePolitique instance = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
         instance.setCivilite(civilite);
         Civilite result = instance.getCivilite();
         assertEquals(civilite, result);
+    }
+
+    /**
+     * Test of toString method, of class HommePolitique.
+     */
+    @Test
+    public void testToString() {
+        System.out.println("toString");
+        String parti = "parti";
+        String nom = "nom";
+        String prenom = "prenom";
+        Civilite civilite = Civilite.HOMME;
+        HommePolitique instance = new HommePolitique(parti, nom, prenom, civilite);
+        String expResult = "Homme Politique : "+prenom+" "+nom+" ; civilité : homme ; parti : "+parti;
+        String result = instance.toString();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of hashCode method, of class HommePolitique.
+     */
+    @Test
+    public void testHashCode() {
+        System.out.println("hashCode");
+        String parti = "parti";
+        String nom = "nom";
+        String prenom = "prenom";
+        Civilite civilite = Civilite.HOMME;
+        HommePolitique instance = new HommePolitique(parti, nom, prenom, civilite);
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(parti);
+        hash = 97 * hash + Objects.hashCode(nom);
+        hash = 97 * hash + Objects.hashCode(prenom);
+        hash = 97 * hash + Objects.hashCode(civilite);
+        int expResult = hash;
+        int result = instance.hashCode();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of equals method, of class HommePolitique.
+     */
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        String parti = "parti";
+        String nom = "nom";
+        String prenom = "prenom";
+        Civilite civilite = Civilite.HOMME;
+        HommePolitique obj = new HommePolitique(parti, nom, prenom, civilite);
+        HommePolitique instance = new HommePolitique(parti, nom, prenom, civilite);
+        boolean expResult = true;
+        boolean result = instance.equals(obj);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of compareTo method, of class HommePolitique.
+     */
+    @Test
+    public void testCompareTo() {
+        System.out.println("compareTo");
+        String parti = "parti";
+        String nom = "nom";
+        String prenom = "prenom";
+        Civilite civilite = Civilite.HOMME;
+        HommePolitique o = new HommePolitique(parti, nom, prenom, civilite);
+        HommePolitique instance = new HommePolitique(parti, nom, prenom, civilite);
+        int expResult = 0;
+        int result = instance.compareTo(o);
+        assertEquals(expResult, result);
     }
     
 }

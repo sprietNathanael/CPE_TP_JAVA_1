@@ -118,7 +118,7 @@ public class HommePolitique implements Comparable<HommePolitique>, Cloneable
         {
             civilite = "femme";
         }
-        return("Homme Politique : "+this.prenom+" "+this.nom+" ; civilité : "+civilite+" ; parti : "+this.parti);
+        return("{Homme Politique : "+this.prenom+" "+this.nom+" ; civilité : "+civilite+" ; parti : "+this.parti+"}");
     }
 
     @Override

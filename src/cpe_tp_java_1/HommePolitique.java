@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author nathanael
  */
-public class HommePolitique implements Comparable<HommePolitique>
+public class HommePolitique implements Comparable<HommePolitique>, Cloneable
 {
 
     public HommePolitique(String parti, String nom, String prenom, Civilite civilite) {
@@ -19,6 +19,11 @@ public class HommePolitique implements Comparable<HommePolitique>
         this.nom = nom;
         this.prenom = prenom;
         this.civilite = civilite;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
     
 

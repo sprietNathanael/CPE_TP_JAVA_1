@@ -149,7 +149,7 @@ public class HommePolitiqueTest {
         String prenom = "prenom";
         Civilite civilite = Civilite.HOMME;
         HommePolitique instance = new HommePolitique(parti, nom, prenom, civilite);
-        String expResult = "Homme Politique : "+prenom+" "+nom+" ; civilité : homme ; parti : "+parti;
+        String expResult = "{Homme Politique : "+prenom+" "+nom+" ; civilité : homme ; parti : "+parti+"}";
         String result = instance.toString();
         assertEquals(expResult, result);
     }
@@ -206,6 +206,22 @@ public class HommePolitiqueTest {
         HommePolitique instance = new HommePolitique(parti, nom, prenom, civilite);
         int expResult = 0;
         int result = instance.compareTo(o);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of clone method, of class HommePolitique.
+     */
+    @Test
+    public void testClone() throws Exception {
+        System.out.println("clone");
+        String parti = "parti";
+        String nom = "nom";
+        String prenom = "prenom";
+        Civilite civilite = Civilite.HOMME;
+        HommePolitique instance = new HommePolitique(parti, nom, prenom, civilite);
+        Object expResult = new HommePolitique(parti, nom, prenom, civilite);
+        Object result = instance.clone();
         assertEquals(expResult, result);
     }
     

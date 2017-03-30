@@ -40,7 +40,17 @@ public class CPE_TP_JAVA_1 {
         System.out.println(h1.compareTo(h2));
         h1.setCivilite(Civilite.FEMME);
         System.out.println(h1.compareTo(h2));
-        
+        System.out.println("-------------");
+        CandidatScrutin cd1, cd2;
+        cd1 = new CandidatScrutin(h1, 54);
+        cd2 = new CandidatScrutin(h2, 54);
+        System.out.println((cd1.equals(cd2)));
+        cd1.incrementeVoix();
+        System.out.println((cd1.equals(cd2)));
+        // rappellons nous que h1 et h2 sont la même personne...
+        System.out.println(cd1.compareCandidat(cd2));
+        System.out.println(cd1.compareTo(cd2));
+        System.out.println(cd2);
     }
     
 }

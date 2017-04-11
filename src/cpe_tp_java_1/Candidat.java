@@ -24,13 +24,20 @@ public class Candidat implements Comparable<Candidat>{
 
     @Override
     public int compareTo(Candidat o) {
-        return this.candidatScrutin.compareTo(o.candidatScrutin);
+        if(o != null)
+        {
+            return this.candidatScrutin.compareTo(o.candidatScrutin);
+        }
+        else
+        {
+            throw new NullPointerException();
+        }
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.candidatScrutin);
+        hash = 53 * hash + this.candidatScrutin.hashCode();
         hash = 53 * hash + (int) (Double.doubleToLongBits(this.pourcentage) ^ (Double.doubleToLongBits(this.pourcentage) >>> 32));
         return hash;
     }
@@ -47,6 +54,7 @@ public class Candidat implements Comparable<Candidat>{
             return false;
         }
         final Candidat other = (Candidat) obj;
+        System.out.println("test"+this.pourcentage+" : "+other.pourcentage);
         if (Double.doubleToLongBits(this.pourcentage) != Double.doubleToLongBits(other.pourcentage)) {
             return false;
         }
@@ -72,6 +80,11 @@ public class Candidat implements Comparable<Candidat>{
         return this.candidatScrutin.getCivilite();
     }
     
+    public int getDate()
+    {
+        return this.candidatScrutin.getDate();
+    }
+    
     private CandidatScrutin candidatScrutin;
 
     private double pourcentage;
@@ -81,6 +94,9 @@ public class Candidat implements Comparable<Candidat>{
         return "Candidat{" + "candidatScrutin=" + candidatScrutin + ", pourcentage=" + pourcentage + '}';
     }
     
+    public boolean compareCandidat(HommePolitique hommePolitique) {
+        return this.candidatScrutin.compareCandidat(hommePolitique);
+    }
     
 
 

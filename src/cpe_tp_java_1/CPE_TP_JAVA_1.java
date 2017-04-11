@@ -48,7 +48,7 @@ public class CPE_TP_JAVA_1 {
         cd1.incrementeVoix();
         System.out.println((cd1.equals(cd2)));
         // rappellons nous que h1 et h2 sont la même personne...
-        System.out.println(cd1.compareCandidat(cd2));
+        System.out.println(cd1.compareCandidat(h2));
         System.out.println(cd1.compareTo(cd2));
         System.out.println(cd2);
         System.out.println("-------------");

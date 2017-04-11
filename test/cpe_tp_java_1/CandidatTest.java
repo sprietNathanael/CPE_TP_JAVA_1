@@ -45,10 +45,11 @@ public class CandidatTest {
         System.out.println("getPourcentage");
         HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
         CandidatScrutin candidatScrutin = new CandidatScrutin(hommePolitique, 5);
-        Candidat instance = new Candidat(candidatScrutin, 100);
+        candidatScrutin.incrementeVoix();
+        Candidat instance = new Candidat(candidatScrutin, 10);
         double expResult = 5.0;
         double result = instance.getPourcentage();
-        assertEquals(expResult, result, 0.0);
+        assertEquals(expResult, result, 10.0);
     }
 
     /**
@@ -57,13 +58,13 @@ public class CandidatTest {
     @Test
     public void testCompareTo() {
         System.out.println("compareTo");
-        Candidat o = null;
-        Candidat instance = null;
+        HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
+        CandidatScrutin candidatScrutin = new CandidatScrutin(hommePolitique, 5);
+        Candidat o = new Candidat(candidatScrutin, 100);
+        Candidat instance = new Candidat(candidatScrutin, 100);
         int expResult = 0;
         int result = instance.compareTo(o);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -72,12 +73,16 @@ public class CandidatTest {
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        Candidat instance = null;
-        int expResult = 0;
+        double pourcentage = 10.0;
+        HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
+        CandidatScrutin candidatScrutin = new CandidatScrutin(hommePolitique, 5);
+        candidatScrutin.incrementeVoix();
+        Candidat instance = new Candidat(candidatScrutin, 10);
+        int expResult = 7;
+        expResult = 53 * expResult +candidatScrutin.hashCode();
+        expResult = 53*expResult + ((int)(Double.doubleToLongBits(pourcentage) ^ (Double.doubleToLongBits(pourcentage) >>> 32)));
         int result = instance.hashCode();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -86,13 +91,14 @@ public class CandidatTest {
     @Test
     public void testEquals() {
         System.out.println("equals");
-        Object obj = null;
-        Candidat instance = null;
+        HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
+        CandidatScrutin candidatScrutin = new CandidatScrutin(hommePolitique, 5);
+        Candidat instance = new Candidat(candidatScrutin, 5);
+        candidatScrutin.incrementeVoix();
+        Candidat obj = new Candidat(candidatScrutin, 6);
         boolean expResult = false;
         boolean result = instance.equals(obj);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -101,12 +107,12 @@ public class CandidatTest {
     @Test
     public void testGetParti() {
         System.out.println("getParti");
-        Candidat instance = null;
-        String expResult = "";
+        HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
+        CandidatScrutin candidatScrutin = new CandidatScrutin(hommePolitique, 5);
+        Candidat instance = new Candidat(candidatScrutin, 5);
+        String expResult = "parti";
         String result = instance.getParti();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -115,12 +121,12 @@ public class CandidatTest {
     @Test
     public void testGetNom() {
         System.out.println("getNom");
-        Candidat instance = null;
-        String expResult = "";
+        HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
+        CandidatScrutin candidatScrutin = new CandidatScrutin(hommePolitique, 5);
+        Candidat instance = new Candidat(candidatScrutin, 5);
+        String expResult = "nom";
         String result = instance.getNom();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -129,12 +135,12 @@ public class CandidatTest {
     @Test
     public void testGetPrenom() {
         System.out.println("getPrenom");
-        Candidat instance = null;
-        String expResult = "";
+        HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
+        CandidatScrutin candidatScrutin = new CandidatScrutin(hommePolitique, 5);
+        Candidat instance = new Candidat(candidatScrutin, 5);
+        String expResult = "prenom";
         String result = instance.getPrenom();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -143,12 +149,12 @@ public class CandidatTest {
     @Test
     public void testGetCivilite() {
         System.out.println("getCivilite");
-        Candidat instance = null;
-        Civilite expResult = null;
+        HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
+        CandidatScrutin candidatScrutin = new CandidatScrutin(hommePolitique, 5);
+        Candidat instance = new Candidat(candidatScrutin, 5);
+        Civilite expResult = Civilite.HOMME;
         Civilite result = instance.getCivilite();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -157,12 +163,42 @@ public class CandidatTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-        Candidat instance = null;
-        String expResult = "";
+        HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
+        CandidatScrutin candidatScrutin = new CandidatScrutin(hommePolitique, 5);
+        candidatScrutin.incrementeVoix();
+        Candidat instance = new Candidat(candidatScrutin, 10);
+        String expResult = "Candidat{candidatScrutin="+candidatScrutin+", pourcentage=10.0}";
         String result = instance.toString();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getDate method, of class Candidat.
+     */
+    @Test
+    public void testGetDate() {
+        System.out.println("getDate");
+        HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
+        CandidatScrutin candidatScrutin = new CandidatScrutin(hommePolitique, 5);
+        Candidat instance = new Candidat(candidatScrutin, 10);
+        int expResult = 5;
+        int result = instance.getDate();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of compareCandidat method, of class Candidat.
+     */
+    @Test
+    public void testCompareCandidat() {
+        System.out.println("compareCandidat");
+        HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
+        HommePolitique hommePolitique2 = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
+        CandidatScrutin candidatScrutin = new CandidatScrutin(hommePolitique, 5);
+        Candidat instance = new Candidat(candidatScrutin, 10);
+        boolean expResult = true;
+        boolean result = instance.compareCandidat(hommePolitique2);
+        assertEquals(expResult, result);
     }
     
 }

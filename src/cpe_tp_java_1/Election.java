@@ -56,6 +56,7 @@ public class Election {
 		scrutin.countTheVotes();
 		// Affichage résultat brut du scrutin
 		System.out.println(scrutin);
+                System.out.println("Taux de participation : "+scrutin.tauxParticipation());
 
 
 		/**
@@ -72,6 +73,7 @@ public class Election {
 		scrutin.countTheVotes();
 		// Affichage résultat brut du scrutin
 		System.out.println(scrutin);
+                System.out.println("Taux de participation : "+scrutin.tauxParticipation());
 	}
 
 
@@ -93,13 +95,13 @@ public class Election {
 				int candNum = Utils.randomInt(hommePolitiques.size());
 				Vote vote = null;
 
-				// bulletins papiers impairs sont sign�s, pairs sont non sign�s
+				// bulletins papiers impairs sont signés, pairs sont non signés
 				boolean signature = true;
 				if ((i % 2) == 0) {
 					signature = false;
 				}
 
-				// simulation cr�ation bulletins de vote
+				// simulation création bulletins de vote
 				switch (i % 3) {
 				case 0:{
 					vote = new BulletinElectronique(hommePolitiques.get(candNum), dateBulletin, dateSrutin);			

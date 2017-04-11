@@ -41,13 +41,13 @@ public class BulletinElectroniqueTest {
      * Test of estInvalide method, of class BulletinElectronique.
      */
     @Test
-    public void testEstInvalide1() {
+    public void testEstInvalide() {
         System.out.println("estInvalide 2 < (dateScrut - dateBull)");
         int dateBull = 1;
         int dateScrut = 5;
         HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
         BulletinElectronique instance = new BulletinElectronique(hommePolitique,dateBull,dateScrut);
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.estInvalide();
         assertEquals(expResult, result);
     }
@@ -58,7 +58,7 @@ public class BulletinElectroniqueTest {
         int dateScrut = 5;
         HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
         BulletinElectronique instance = new BulletinElectronique(hommePolitique,dateBull,dateScrut);
-        boolean expResult = true;
+        boolean expResult = false;
         boolean result = instance.estInvalide();
         assertEquals(expResult, result);
     }
@@ -69,7 +69,7 @@ public class BulletinElectroniqueTest {
         int dateScrut = 5;
         HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
         BulletinElectronique instance = new BulletinElectronique(hommePolitique,dateBull,dateScrut);
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.estInvalide();
         assertEquals(expResult, result);
     }
@@ -80,7 +80,7 @@ public class BulletinElectroniqueTest {
         int dateScrut = 5;
         HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
         BulletinElectronique instance = new BulletinElectronique(hommePolitique,dateBull,dateScrut);
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.estInvalide();
         assertEquals(expResult, result);
     }
@@ -127,6 +127,19 @@ public class BulletinElectroniqueTest {
         boolean result = instance.checkDate();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of toString method, of class BulletinElectronique.
+     */
+    @Test
+    public void testToString() {
+        System.out.println("toString");
+        int dateBull = 6;
+        int dateScrut = 7;
+        HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
+        BulletinElectronique instance = new BulletinElectronique(hommePolitique,dateBull,dateScrut);
+        String expResult = "Vote par BulletinElectronique le 6 pour le scrutin du 7 pour " + hommePolitique + " -> invalide";
+        String result = instance.toString();
         assertEquals(expResult, result);
     }
     

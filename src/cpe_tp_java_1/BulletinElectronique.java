@@ -43,5 +43,12 @@ public class BulletinElectronique implements Vote, CheckDateBulletin{
         int dateLimite = 2;
         return (this.dateScrutin - this.dateBulletin) >= dateLimite;
     }
+
+    @Override
+    public String toString() {
+        return "Vote par "+this.getClass().getSimpleName()+" le "+this.dateBulletin+" pour le scrutin du "+this.dateScrutin+" pour " + this.hommePolitique + " -> "+(this.estInvalide()? "invalide":"valide");
+    }
+    
+    
     
 }

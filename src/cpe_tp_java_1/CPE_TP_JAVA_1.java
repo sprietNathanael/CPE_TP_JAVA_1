@@ -51,6 +51,9 @@ public class CPE_TP_JAVA_1 {
         System.out.println(cd1.compareCandidat(cd2));
         System.out.println(cd1.compareTo(cd2));
         System.out.println(cd2);
+        System.out.println("-------------");
+        Candidat candidat1 = new Candidat(cd1, 10);
+        System.out.println(candidat1);
     }
     
 }

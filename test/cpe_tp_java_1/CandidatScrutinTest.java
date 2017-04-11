@@ -197,7 +197,7 @@ public class CandidatScrutinTest {
         CandidatScrutin instance = new CandidatScrutin(h1, 0);
         CandidatScrutin cd = new CandidatScrutin(h2, 0);
         boolean expResult = true;
-        boolean result = instance.compareCandidat(cd);
+        boolean result = instance.compareCandidat(h2);
         assertEquals(expResult, result);
     }
 

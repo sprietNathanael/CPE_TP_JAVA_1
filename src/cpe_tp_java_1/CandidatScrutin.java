@@ -75,7 +75,7 @@ public class CandidatScrutin implements Comparable<CandidatScrutin>{
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 97 * hash + Objects.hashCode(this.hommePolitique);
+        hash = 97 * hash + this.hommePolitique.hashCode();
         hash = 97 * hash + this.nbVoix;
         hash = 97 * hash + this.date;
         return hash;
@@ -109,18 +109,20 @@ public class CandidatScrutin implements Comparable<CandidatScrutin>{
         this.nbVoix++;
     }
 
-    public boolean compareCandidat(CandidatScrutin cd) {
-        if(this.hommePolitique.compareTo(cd.hommePolitique) == 0) {
-            return true;
-        }
-        else {
-            return false;
-        }
+    public boolean compareCandidat(HommePolitique hommePolitique) {
+        return this.hommePolitique.equals(hommePolitique);
     }
 
     @Override
     public int compareTo(CandidatScrutin o) {
-        return this.hommePolitique.compareTo(o.hommePolitique);
+        if(o != null)
+        {
+            return this.hommePolitique.compareTo(o.hommePolitique);
+        }
+        else
+        {
+            throw new NullPointerException();
+        }
     }
     
     

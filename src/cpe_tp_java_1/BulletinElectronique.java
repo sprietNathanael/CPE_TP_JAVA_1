@@ -25,7 +25,7 @@ public class BulletinElectronique implements Vote, CheckDateBulletin{
 
     @Override
     public boolean estInvalide() {
-        return this.checkDate(this.dateScrutin);
+        return !this.checkDate();
     }
 
     @Override
@@ -39,9 +39,9 @@ public class BulletinElectronique implements Vote, CheckDateBulletin{
     }
 
     @Override
-    public boolean checkDate(int dateScrutin) {
+    public boolean checkDate() {
         int dateLimite = 2;
-        return (dateScrutin - this.dateBulletin) >= dateLimite;
+        return (this.dateScrutin - this.dateBulletin) >= dateLimite;
     }
     
 }

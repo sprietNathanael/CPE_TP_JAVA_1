@@ -124,7 +124,9 @@ public class BulletinElectroniqueTest {
         HommePolitique hommePolitique = new HommePolitique("parti", "nom", "prenom", Civilite.HOMME);
         BulletinElectronique instance = new BulletinElectronique(hommePolitique,dateBull,dateScrut);
         boolean expResult = false;
-        boolean result = instance.checkDate(dateScrut);
+        boolean result = instance.checkDate();
+        assertEquals(expResult, result);
+    }
         assertEquals(expResult, result);
     }
     

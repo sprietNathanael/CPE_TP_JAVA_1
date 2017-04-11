@@ -9,5 +9,5 @@ package cpe_tp_java_1;
 
 public interface CheckDateBulletin {
 	 
-  public boolean checkDate(int dateScrutin);
+  public boolean checkDate();
 }

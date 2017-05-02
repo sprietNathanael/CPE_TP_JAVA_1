@@ -5,6 +5,7 @@
  */
 package cpe_tp_java_1;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -93,6 +94,16 @@ public class Scrutin {
             }
         }
     }    
+    
+    public ArrayList getCandidatList()
+    {
+        ArrayList res = new ArrayList();
+        for(CandidatScrutin candidatScrutin : this.candidatScrutins)
+        {
+            res.add(new Candidat(candidatScrutin,this.nbVotesValides));
+        }
+        return(res);
+    }
     
     public int tauxParticipation()
     {

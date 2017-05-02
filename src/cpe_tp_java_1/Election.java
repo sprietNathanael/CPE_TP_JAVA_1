@@ -13,6 +13,7 @@ import java.util.Random;
 
 import cpe_tp_java_1.Civilite;
 import cpe_tp_java_1.HommePolitique;
+import java.util.Collection;
 
 
 
@@ -21,107 +22,84 @@ import cpe_tp_java_1.HommePolitique;
  */
 
 public class Election {
+        
+    private Scrutin scrutin;
 
-	public static void main(String args[]) {
+    public Election() {
+        this.scrutin = null;
+    }
 
-		Scrutin scrutin;
-		int dateSrutin;	
-		int population;
-		int votants;
-		int dateBulletin;
-		List< HommePolitique> hommePolitiques;
-		
-		hommePolitiques = new ArrayList< HommePolitique>();
-		hommePolitiques.add(new HommePolitique("parti1", "Oxlama","Tarek",Civilite.HOMME));
-                hommePolitiques.add(new HommePolitique("parti2","Tarcozi","Nicolai",Civilite.HOMME));
-                hommePolitiques.add(new HommePolitique("parti3","Imirboutine","Vlad",Civilite.HOMME));
-                hommePolitiques.add(new HommePolitique("parti4","Anerckjel","Angel",Civilite.FEMME));
-		
-		scrutin = null;
-		dateSrutin = 15;		
-		population = 30;
-		votants = 20;
+   
+    
+    public void launchElection(List< HommePolitique> hommePolitiques, int votants,
+                    int dateSrutin, int dateBulletin, int population)
+    {
+       this.scrutin = new Scrutin(hommePolitiques, population, dateSrutin);
+       simulerVotes(hommePolitiques, votants, dateSrutin, dateBulletin, population);
+       this.scrutin.countTheVotes();
+       
 
-		/**
-		 * simulation de votes 
-		 * - tous sont envoyés à la même date 
-		 * - Tous passent le check de date
-		 * - 1 bulletins papier sur 2 passe check signature
-		 */				
-		System.out.println("\n\t1ère simulation \n" );
-		dateBulletin = 13;	
-		// simulation votes
-		scrutin = simulerVotes(hommePolitiques, votants, dateSrutin, dateBulletin, population);
-		// Traitement après vote
-		scrutin.countTheVotes();
-		// Affichage résultat brut du scrutin
-		System.out.println(scrutin);
-                System.out.println("Taux de participation : "+scrutin.tauxParticipation());
+    }
+    
+    public ArrayList getCandidatList(String type)
+    {
+        ArrayList candidatList = this.scrutin.getCandidatList();
+        if(type.equals("pourcentage"))
+        {
+            candidatList.sort(new PercentageComparator());
+        }
+        return candidatList;
+    }
+    
+    public int getTauxDeParticipation()
+    {
+        return(this.scrutin.tauxParticipation());
+    }
 
+    private void simulerVotes(List< HommePolitique> hommePolitiques, int votants,
+                    int dateSrutin, int dateBulletin, int population) {
 
-		/**
-		 * simulation de votes 
-		 * - tous sont envoyés à la même date invalide
-		 * - Seuls les bulletins papier passent le check
-		 * - 1 bulletins papier sur 2 passe check signature
-		 */		
-		System.out.println("\n\t2ème simulation \n" );
-		dateBulletin = 16;		
-		// simulation votes
-		scrutin = simulerVotes(hommePolitiques, votants, dateSrutin, dateBulletin, population);	
-		// Traitement après vote
-		scrutin.countTheVotes();
-		// Affichage résultat brut du scrutin
-		System.out.println(scrutin);
-                System.out.println("Taux de participation : "+scrutin.tauxParticipation());
-	}
+        
 
+        // ou bien
+        //		scrutin = new Scrutin(population, dateSrutin);
+        //		for (HommePolitique hommePolitique : hommePolitiques )
+        //			scrutin.addCandidat(hommePolitique);
 
-	private static Scrutin simulerVotes(List< HommePolitique> hommePolitiques, int votants,
-			int dateSrutin, int dateBulletin, int population) {
+        //System.out.println(scrutin);
 
-		Scrutin scrutin = new Scrutin(hommePolitiques, population, dateSrutin);
+        if (hommePolitiques!=null){
+            for (int i = 0; i < votants; ++i) {
 
-		// ou bien
-		//		scrutin = new Scrutin(population, dateSrutin);
-		//		for (HommePolitique hommePolitique : hommePolitiques )
-		//			scrutin.addCandidat(hommePolitique);
+                int candNum = Utils.randomInt(hommePolitiques.size());
+                Vote vote = null;
 
-		//System.out.println(scrutin);
+                // bulletins papiers impairs sont signés, pairs sont non signés
+                boolean signature = true;
+                if ((i % 2) == 0) {
+                        signature = false;
+                }
 
-		if (hommePolitiques!=null){
-			for (int i = 0; i < votants; ++i) {
-
-				int candNum = Utils.randomInt(hommePolitiques.size());
-				Vote vote = null;
-
-				// bulletins papiers impairs sont signés, pairs sont non signés
-				boolean signature = true;
-				if ((i % 2) == 0) {
-					signature = false;
-				}
-
-				// simulation création bulletins de vote
-				switch (i % 3) {
-				case 0:{
-					vote = new BulletinElectronique(hommePolitiques.get(candNum), dateBulletin, dateSrutin);			
-					break;
-				}			
-				case 1:{
-					vote = new BulletinPapier(hommePolitiques.get(candNum), dateBulletin, dateSrutin, signature);
-					break;
-				}
-				case 2:{
-					vote = new BulletinCourrier(hommePolitiques.get(candNum), dateBulletin, dateSrutin, signature);
-				}
-				default: // nothing			
-				}
-			//	System.out.println(vote);		// pour v�rif ToString() des classes qui impl�mentent Vote
-				scrutin.addBulletin(vote);				
-			}
-		}
-		return scrutin;
-	}
+                // simulation création bulletins de vote
+                switch (i % 3) {
+                case 0:{
+                        vote = new BulletinElectronique(hommePolitiques.get(candNum), dateBulletin, dateSrutin);			
+                        break;
+                }			
+                case 1:{
+                        vote = new BulletinPapier(hommePolitiques.get(candNum), dateBulletin, dateSrutin, signature);
+                        break;
+                }
+                case 2:{
+                        vote = new BulletinCourrier(hommePolitiques.get(candNum), dateBulletin, dateSrutin, signature);
+                }
+                default: // nothing			
+                }
+        //	System.out.println(vote);		// pour v�rif ToString() des classes qui impl�mentent Vote
+                this.scrutin.addBulletin(vote);				
+            }
+        }
+    }
 }
 
 
